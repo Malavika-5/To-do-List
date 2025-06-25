@@ -13,4 +13,4 @@ A simple, dynamic To-Do List application built with **HTML, CSS, and Vanilla Jav
 - **Development**: VS Code, live-server.
 
 ## View Project
-[Live Demo]()
+[Live Demo](https://malavika-5.github.io/To-do-List/)
