@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To Do</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h1>Your To Do</h1>
+            <div class="progress-container">
+                <div class="progress-text">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="progress-count">0/0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <form class="input-area">
+                <input type="text" id="task-input" placeholder="Add a new task..." required>
+                <button type="submit" id="add-task-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </form>
+            <div class="todos-container">
+                <ul id="task-list">
+
+                </ul>
+                <img src="images/no-task.png" alt="empty" id="empty" class="empty-image">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+
+</html>
