@@ -12,3 +12,5 @@ A simple, dynamic To-Do List application built with **HTML, CSS, and Vanilla Jav
 - **Front-end**: HTML5, CSS3, JavaScript (ES6).
 - **Development**: VS Code, live-server.
 
+## View Project
+[Live Demo]()
