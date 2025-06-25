@@ -7,12 +7,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressText = document.querySelector('.progress-text');
     const progressFill = document.querySelector('.progress-fill');
 
+    // Load tasks from local storage when page loads
+    const loadTasks = () => {
+        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        savedTasks.forEach(task => {
+            addTask(task.text, task.completed, false);
+        });
+        toggleEmptyState();
+        updateProgress();
+    };
+
+    // Save tasks to local storage
+    const saveTasks = () => {
+        const tasks = [];
+        document.querySelectorAll('#task-list li').forEach(li => {
+            tasks.push({
+                text: li.querySelector('span').textContent,
+                completed: li.querySelector('.checkbox').checked
+            });
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    };
+
     const toggleEmptyState = () => {
         emptyImage.style.display = taskList.children.length === 0 ? 'block' : 'none';
         todosContainer.style.width = taskList.children.length > 0 ? '100%' : '50%';
-    }
+    };
 
-    const addTask = (text, completed = false) => {
+    const addTask = (text, completed = false, shouldSave = true) => {
         const taskText = text || taskInput.value.trim();
         if (!taskText) {
             return;
@@ -46,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             editButton.style.opacity = isChecked ? '0.5' : '1';
             editButton.style.pointerEvents = isChecked ? 'none' : 'auto';
             updateProgress();
+            saveTasks();
         });
 
         editButton.addEventListener('click', () => {
@@ -54,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.remove();
                 toggleEmptyState();
                 updateProgress();
+                saveTasks();
             }
         });
 
@@ -61,22 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
             li.remove();
             toggleEmptyState();
             updateProgress();
+            saveTasks();
         });
 
         taskList.appendChild(li);
         taskInput.value = '';
         toggleEmptyState();
         updateProgress();
+        if (shouldSave) saveTasks();
     };
 
-
     function triggerConfetti() {
-        const count = 300; // Increased particle count
+        const count = 300;
         const defaults = {
             origin: { y: 0.6 },
-            spread: 100, // Wider spread
-            ticks: 200, // Longer duration
-            gravity: 0.5, // Slower fall
+            spread: 100,
+            ticks: 200,
+            gravity: 0.5,
             colors: [
                 '#9b59b6', '#6a0dad', '#e2b4ff',
                 '#ff6b9e', '#ffffff', '#c9a0ff'
@@ -84,14 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
             shapes: ['circle', 'square', 'star']
         };
 
-        // Big center burst
         confetti({
             ...defaults,
             particleCount: count,
             startVelocity: 30
         });
 
-        // Side bursts with delay
         setTimeout(() => {
             confetti({
                 ...defaults,
@@ -116,9 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
         progressFill.style.width = `${progressPercentage}%`;
 
-
         if (totalTasks > 0 && completedTasks === totalTasks) {
-
             if (!progressFill.dataset.wasComplete) {
                 triggerConfetti();
             }
@@ -140,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    toggleEmptyState();
-    updateProgress();
+    // Initialize the app
+    loadTasks();
 });
