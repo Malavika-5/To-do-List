@@ -2,8 +2,6 @@
 
 A simple, dynamic To-Do List application built with **HTML, CSS, and Vanilla JavaScript**. Users can add, delete, and mark tasks as complete—all without page reloads.
 
-![Demo Screenshot](#) *(Optional: Add a screenshot or GIF later)*
-
 ## Features ✨
 - **Add tasks**: Type a task and click "Add" to insert it into the list.
 - **Mark as complete**: Click a task to toggle its completion status (strikethrough).
